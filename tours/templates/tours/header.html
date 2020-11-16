@@ -1,0 +1,58 @@
+{% load static %}
+
+<header>
+    <div class="container">
+        <div class="block_header top_block_header">
+            <div class="top_left_block_header_buttons">
+                <button type="button" id="button_to_contact_us" class="button_header">Связаться с нами</button>
+            </div>
+
+            <nav class="top_right_block_header_icon">     
+                <a href="https://www.instagram.com/shangereevtour" target="blank"><img class="icon" src="{% static 'images/instagram.svg' %}"></a>
+                <a href="https://wa.me/79654898880" target="blank"><img class="icon" src="{% static 'images/whatsapp.svg' %}"></a>
+                <a href="callto:+79654898880"><img class="icon" src="{% static 'images/phone-alt.svg' %}"></a>
+                <a href="https://www.facebook.com/people/Shangereev-Tour/100001601888764" target="blank"><img class="icon" src="{% static 'images/facebook.svg' %}"></a>
+            </nav>
+        </div>
+
+
+        <div class="block_header bottom_block_header">
+            <div class="header_logo">
+                <a href="{% url 'about_us' %}"><img class="logo" src="{% static 'images/logo1.png' %}"></a>
+            </div>
+
+            <div class="menu_toggle">
+                <a href="#"><img class="icon icon_burger" src="{% static 'images/burger.svg' %}"></a>
+            </div> 
+
+            <nav class="bottom_right_block_header_links">
+                <ul>
+                    <li><a href="{% url 'about_us' %}">Главная</a></li>
+                    <li><a href="{% url 'timetable' %}">Расписание</a></li>
+                    <li><a href="#">Туры</a>   
+                        <ul>
+                            {% for trip in trips %}
+                                <li><a href="{% url 'page_travels' trip.url %}">{{trip.trips_name}}</a></li>
+                            {% endfor %}
+                        </ul> 
+                    </li>
+                    <li><a href="{% url 'command' %}">Команда</a></li>
+                </ul>
+            </nav>    
+        </div>
+
+        <div class="popup_block" id="block_to_contact_us">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="text" placeholder="Ваше имя" name="name" required>
+                <input type="email" placeholder="Ваш e-mail" name="email" required>
+                <input type="tel" placeholder="Ваш номер телефона" name="tel" maxlength="11" pattern="\8\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}" required>
+                <textarea type="text" placeholder="Сообщение..." rows="5" cols="" name="message" required></textarea>
+
+                <button type="submit" class="button_popup_block">Отправить</button>
+                <button type="button" id="button_close_block_to_contact_us" class="button_popup_block button_cancel_popup_block">Закрыть</button>
+            </form>
+        </div>
+         
+    </div>
+</header>

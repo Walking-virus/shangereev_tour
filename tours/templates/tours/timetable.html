@@ -1,0 +1,29 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+		<section>
+			<div class="container">
+				<div class="flex">	
+					{% for timetables in timetable %}
+						<article class="article">
+							<!-- <h3>Расписанице:</h3> -->
+							<ul>
+								<li>
+									<b>Отправка:</b> <em>{{timetables.sending_date}}</em>
+									<br>
+									<b>Прибытие:</b> <em>{{timetables.departure_date}}</em>
+								</li>
+							</ul>
+
+							<h2>Места поездки:</h2>
+							<ol>
+								{% for nametrip in  timetables.name_trips.all %}
+         							<li><a href="{% url 'detail_about_travel' nametrip.url %}">{{nametrip.name_travel}}</a></li>
+								{% endfor %}
+							</ol>
+						</article>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+{% endblock %}

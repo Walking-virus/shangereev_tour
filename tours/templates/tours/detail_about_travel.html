@@ -1,0 +1,50 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+
+	<section>
+		<div class="container">
+			<div class="block_description">
+				<h2>'{{travel.name_travel}}' стоимость поездки: {{travel.price_travel}}p</h2>
+				<video width="100%" controls="controls" poster="">
+					<source src="{{travel.video_travel.url}}">
+				</video>
+				<p class="travel_p">{{travel.description_travel|linebreaksbr}}</p>
+			</div>
+
+			<div class="block_carousel">
+				{% for image in travel.travel.all %}
+					<img src="{{image.images_travel.url}}" alt="Cлайдer">
+				{% endfor %}
+
+				<a class="prev" onclick="minusSlide()">&#10094;</a>
+				<a class="next" onclick="plusSlide()">&#10095;</a>
+			</div>
+
+
+        	<!-- <button type="button" class="button_review" id="button_review" >Оставить отзыв!</button> -->
+
+			<div class="block_feedback" id="form_feedback">
+	            <form method="POST">
+	            	{% csrf_token %}
+	                <input type="text" placeholder="Ваше имя" name="user_name" required>
+	                <textarea type="text" placeholder="Введите текст" rows="8" cols="" name="user_comment" required></textarea>
+	                <button type="submit" class="button_block_feedback">Отправить</button>
+	            </form>
+	        </div>
+
+	        <div class="block_comment">
+	        	
+	        		{% if travel.comment.all %}	        
+	        			{% for comments in comment %}		
+		    	   			<b>Автор:</b> {{comments.user_name}} <em>Дата публикации: {{comments.release_date|date:"d E Y, в H:i:s"}}</em>
+							<p>{{comments.user_comment}}</p>		
+						{% endfor %}	
+    	   			{% else %}    	   			
+    	    				Пока нет отзывов, станьте первыми!
+    	    		{% endif %}
+	        </div>
+		</div>
+	</section>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+		<section>
+			<div class="container">
+				<div class="flex">
+					{% for travels in travel %}
+						<article class="article">
+							<img  class="article_travel_img" src="{{travels.photo_main.url}}">
+							<h2>{{travels.name_travel}}</h2>
+							<h3>Цена: {{travels.price_travel}}р</h3>
+							<p>{{travels.description_travel|truncatewords:3}}</p>
+							<a class="button_details" href="{% url 'detail_about_travel' travels.url %}">Подробнее</a>
+						</article>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+{% endblock %}

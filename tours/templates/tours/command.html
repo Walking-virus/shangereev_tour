@@ -1,0 +1,17 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+		<section>
+			<div class="container">
+				<div class="flex">
+					{% for commands in command %}
+						<article class="article">
+							<img  class="article_command_img" src="{{commands.photo_employee.url}}">
+							<h2>{{commands.name_employee}}</h2>
+							<h3>{{commands.description_employee}}</h3>
+						</article>
+				{% endfor %}
+				</div>
+			</div>
+		</section>
+{% endblock %}
