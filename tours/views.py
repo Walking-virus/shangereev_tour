@@ -12,6 +12,7 @@ def header(request):
 
 def command(request):
 	trips = Trips.objects.all()
+	trips = Trips.objects.all()
 	command = Command.objects.all()
 	trips = Trips.objects.all()
 	form = ContactUsForm(request.POST)
